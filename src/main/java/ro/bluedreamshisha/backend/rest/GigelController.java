@@ -1,22 +1,25 @@
 package ro.bluedreamshisha.backend.rest;
 
-import jakarta.websocket.server.PathParam;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-import ro.bluedreamshisha.backend.model.request.ExampleRequest;
-import ro.bluedreamshisha.backend.model.request.GigelRequest;
-import ro.bluedreamshisha.backend.model.response.ExampleResponse;
-import ro.bluedreamshisha.backend.model.response.GigelResponse;
+import org.springframework.web.multipart.MultipartFile;
+import ro.bluedreamshisha.backend.client.FileManagementClient;
+import ro.bluedreamshisha.backend.model.file_management.File;
+import ro.bluedreamshisha.backend.model.file_management.FileCategory;
 
 @RestController
 @RequestMapping("${api.url.base}/gigel")
+@RequiredArgsConstructor
 public class GigelController {
 
-    @PostMapping("/{id}")
-    public GigelResponse example(@PathParam("id") Long id,
-                                 @RequestBody GigelRequest request) {
-        return new GigelResponse();
+    private final FileManagementClient fileManagementClient;
+
+    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public File example(@RequestPart("file") MultipartFile file) {
+        return fileManagementClient.upload(file, FileCategory.PLATFORM);
     }
 }
