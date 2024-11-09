@@ -8,7 +8,7 @@ import lombok.Getter;
 public enum FileCategory {
 
     PUBLIC("public"),
-    PLATFORM("platform");
+    PRIVATE("private");
 
     private final String value;
 }
