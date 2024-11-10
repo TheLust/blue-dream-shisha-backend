@@ -1,9 +1,10 @@
 package ro.bluedreamshisha.backend.model.file_management;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,15 +23,16 @@ public class File {
     @Id
     private UUID uuid;
 
-    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private FileCategory category;
 
-    @NotBlank
+    @Column(nullable = false)
     private String extension;
 
-    @NotNull
+    @Column(nullable = false)
     private LocalDateTime creationTimestamp;
 
-    @NotBlank
+    @Column(nullable = false)
     private String url;
 }

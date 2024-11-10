@@ -2,12 +2,9 @@ package ro.bluedreamshisha.backend.model.swiper_image;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,13 +25,11 @@ public class SwiperImage {
 
     @MapsId
     @OneToOne
-    @NotNull
     private File file;
 
-    @NotNull
     @Column(nullable = false, unique = true)
     private Integer index;
 
-    @NotNull
+    @Column(nullable = false)
     private Boolean enabled;
 }

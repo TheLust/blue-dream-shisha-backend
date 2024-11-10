@@ -14,7 +14,7 @@ public class BlueDreamShishaException extends Exception {
 
     public BlueDreamShishaException(String errorCode, HttpStatus status, Throwable cause) {
         super(cause);
-        this.response = new BlueDreamShishaErrorResponse(errorCode, status);
+        this.response = new BlueDreamShishaErrorResponse(errorCode, status, cause);
     }
 
     public BlueDreamShishaException(String message, String errorCode, HttpStatus status) {
@@ -24,6 +24,6 @@ public class BlueDreamShishaException extends Exception {
 
     public BlueDreamShishaException(String message, String errorCode, HttpStatus status, Throwable cause) {
         super(message, cause);
-        this.response = new BlueDreamShishaErrorResponse(message, errorCode, status);
+        this.response = new BlueDreamShishaErrorResponse(message, errorCode, status, cause);
     }
 }

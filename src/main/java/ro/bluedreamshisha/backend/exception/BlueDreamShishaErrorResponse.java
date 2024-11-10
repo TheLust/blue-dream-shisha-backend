@@ -17,6 +17,7 @@ public class BlueDreamShishaErrorResponse {
     private String errorCode;
     private HttpStatus status;
     private LocalDateTime timestamp;
+    private Throwable cause;
 
     public BlueDreamShishaErrorResponse(String errorCode, HttpStatus status) {
         this.errorCode = errorCode;
@@ -26,6 +27,18 @@ public class BlueDreamShishaErrorResponse {
 
     public BlueDreamShishaErrorResponse(String message, String errorCode, HttpStatus status) {
         this(errorCode, status);
+        this.message = message;
+    }
+
+    public BlueDreamShishaErrorResponse(String errorCode, HttpStatus status, Throwable cause) {
+        this.errorCode = errorCode;
+        this.status = status;
+        this.timestamp = LocalDateTime.now();
+        this.cause = cause;
+    }
+
+    public BlueDreamShishaErrorResponse(String message, String errorCode, HttpStatus status, Throwable cause) {
+        this(errorCode, status, cause);
         this.message = message;
     }
 }
