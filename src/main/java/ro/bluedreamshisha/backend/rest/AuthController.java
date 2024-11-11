@@ -97,12 +97,18 @@ public class AuthController {
             @ApiResponse(
                     responseCode = "400",
                     description = SwaggerDescription.HTTP_400,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ServiceError.class)
+                    )
             ),
             @ApiResponse(
                     responseCode = "500",
                     description = SwaggerDescription.HTTP_500,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ServiceError.class)
+                    )
             )
     })
     public AuthResponse register(@RequestBody RegisterRequest request) throws BlueDreamShishaException {
@@ -123,12 +129,18 @@ public class AuthController {
             @ApiResponse(
                     responseCode = "400",
                     description = SwaggerDescription.HTTP_400,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ServiceError.class)
+                    )
             ),
             @ApiResponse(
                     responseCode = "500",
                     description = SwaggerDescription.HTTP_500,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ServiceError.class)
+                    )
             )
     })
     public List<FieldError> checkRegisterRequest(@RequestBody RegisterRequest request) {

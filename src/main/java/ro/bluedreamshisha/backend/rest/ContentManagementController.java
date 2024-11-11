@@ -43,22 +43,34 @@ public class ContentManagementController {
             @ApiResponse(
                     responseCode = "400",
                     description = SwaggerDescription.HTTP_400,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ServiceError.class)
+                    )
             ),
             @ApiResponse(
                     responseCode = "401",
                     description = SwaggerDescription.HTTP_401,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ServiceError.class)
+                    )
             ),
             @ApiResponse(
                     responseCode = "403",
                     description = SwaggerDescription.HTTP_403,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ServiceError.class)
+                    )
             ),
             @ApiResponse(
                     responseCode = "500",
                     description = SwaggerDescription.HTTP_500,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ServiceError.class)
+                    )
             )
     })
     public SwiperImageDto uploadSwiperImage(@RequestParam("order") Integer order,

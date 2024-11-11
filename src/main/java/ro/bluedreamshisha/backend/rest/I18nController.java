@@ -10,9 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ro.bluedreamshisha.backend.constant.ErrorCode;
@@ -22,7 +20,6 @@ import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.ServiceE
 import ro.bluedreamshisha.backend.facade.I18nFacade;
 
 import java.io.IOException;
-import java.util.Map;
 
 @RestController
 @RequestMapping("${api.url.base}/i18n")
@@ -42,22 +39,34 @@ public class I18nController {
             @ApiResponse(
                     responseCode = "400",
                     description = SwaggerDescription.HTTP_400,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ServiceError.class)
+                    )
             ),
             @ApiResponse(
                     responseCode = "401",
                     description = SwaggerDescription.HTTP_401,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ServiceError.class)
+                    )
             ),
             @ApiResponse(
                     responseCode = "403",
                     description = SwaggerDescription.HTTP_403,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ServiceError.class)
+                    )
             ),
             @ApiResponse(
                     responseCode = "500",
                     description = SwaggerDescription.HTTP_500,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ServiceError.class)
+                    )
             )
     })
     public ResponseEntity<String> upsertTranslations() throws BlueDreamShishaException {

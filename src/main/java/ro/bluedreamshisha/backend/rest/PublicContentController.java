@@ -60,7 +60,13 @@ public class PublicContentController {
         );
     }
 
-    @GetMapping(value = "/swiper/images/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
+    @GetMapping(
+            value = "/swiper/images/{id}",
+            produces = {
+                    MediaType.IMAGE_JPEG_VALUE,
+                    MediaType.IMAGE_PNG_VALUE,
+                    MediaType.IMAGE_GIF_VALUE
+            })
     @Operation(operationId = "find-swiper-image")
     @ApiResponses({
             @ApiResponse(
@@ -70,17 +76,26 @@ public class PublicContentController {
             @ApiResponse(
                     responseCode = "400",
                     description = SwaggerDescription.HTTP_400,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ServiceError.class)
+                    )
             ),
             @ApiResponse(
                     responseCode = "404",
                     description = SwaggerDescription.HTTP_404,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ServiceError.class)
+                    )
             ),
             @ApiResponse(
                     responseCode = "500",
                     description = SwaggerDescription.HTTP_500,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ServiceError.class)
+                    )
             )
     })
     public ResponseEntity<byte[]> findSwiperImage(@PathVariable("id") UUID uuid) throws BlueDreamShishaException {
@@ -109,12 +124,18 @@ public class PublicContentController {
             @ApiResponse(
                     responseCode = "400",
                     description = SwaggerDescription.HTTP_400,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ServiceError.class)
+                    )
             ),
             @ApiResponse(
                     responseCode = "500",
                     description = SwaggerDescription.HTTP_500,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ServiceError.class)
+                    )
             )
     })
     public Map<String, String> findTranslations(@PathVariable("language") String language) {
