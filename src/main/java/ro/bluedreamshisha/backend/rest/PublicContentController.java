@@ -70,6 +70,11 @@ public class PublicContentController {
                     content = @Content(schema = @Schema(implementation = ServiceError.class))
             ),
             @ApiResponse(
+                    responseCode = "404",
+                    description = SwaggerDescription.HTTP_404,
+                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+            ),
+            @ApiResponse(
                     responseCode = "500",
                     description = SwaggerDescription.HTTP_500,
                     content = @Content(schema = @Schema(implementation = ServiceError.class))

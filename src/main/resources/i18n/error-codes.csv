@@ -1,0 +1,7 @@
+CODE|LANGUAGE|TRANSLATION
+ERROR_UNHANDLED_ERROR|en|An unexpected error occurred in out system. Please try again
+ERROR_NOT_FOUND|en|The resource was not found in our system please try again
+ERROR_UNAUTHORIZED|en|You don't have access to this resource. Please contact us
+ERROR_ACCESS_DENIED|en|You don't have access to this resource. Please contact us
+ERROR_BAD_CREDENTIALS|en|Your username and password are incorrect
+ERROR_CHECK_ERROR|en|The validation failed for this request/resource. This error usually should not be returned, please let us know.

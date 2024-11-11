@@ -2,10 +2,12 @@ package ro.bluedreamshisha.backend.constant;
 
 public interface ErrorCode {
 
-    String UNHANDLED_ERROR = "UNHANDLED_ERROR";
-    String NOT_FOUND = "NOT_FOUND";
-    String UNAUTHORIZED = "UNAUTHORIZED";
-    String ACCESS_DENIED = "ACCESS_DENIED";
-    String BAD_CREDENTIALS = "BAD_CREDENTIALS";
-    String CHECK_ERROR = "CHECK_ERROR";
+    String PREFIX = "ERROR_";
+
+    String UNHANDLED_ERROR = PREFIX + "UNHANDLED_ERROR";
+    String NOT_FOUND = PREFIX + "NOT_FOUND";
+    String UNAUTHORIZED = PREFIX + "UNAUTHORIZED";
+    String ACCESS_DENIED = PREFIX + "ACCESS_DENIED";
+    String BAD_CREDENTIALS = PREFIX + "BAD_CREDENTIALS";
+    String CHECK_ERROR = PREFIX + "CHECK_ERROR";
 }

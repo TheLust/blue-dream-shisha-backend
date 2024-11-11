@@ -23,4 +23,20 @@ public class CheckUtils {
 
         return true;
     }
+
+    public static boolean minLength(List<FieldError> fieldErrors, String target, Integer minLength, String jsonPath, String errorCode) {
+        if (target != null && !target.isBlank() && target.length() < minLength) {
+            fieldErrors.add(new FieldError(jsonPath, errorCode));
+        }
+
+        return true;
+    }
+
+    public static boolean maxLength(List<FieldError> fieldErrors, String target, Integer maxLength, String jsonPath, String errorCode) {
+        if (target != null && !target.isBlank() && target.length() > maxLength) {
+            fieldErrors.add(new FieldError(jsonPath, errorCode));
+        }
+
+        return true;
+    }
 }

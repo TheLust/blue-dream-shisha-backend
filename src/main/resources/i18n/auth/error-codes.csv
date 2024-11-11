@@ -1,9 +1,0 @@
-CODE|LANGUAGE|TRANSLATION
-LOGIN_USERNAME_BLANK|en|Username is mandatory
-LOGIN_PASSWORD_BLANK|en|Password is mandatory
-LOGIN_USERNAME_NOT_EXISTS|en|Username not found
-LOGIN_PASSWORD_INCORRECT|en|Incorrect password
-REGISTER_USERNAME_BLANK|en|Username is mandatory
-REGISTER_PASSWORD_BLANK|en|Password is mandatory
-REGISTER_USERNAME_EXISTS|en|Username already exists
-REGISTER_PASSWORD_WEEK|en|Password not strong enough

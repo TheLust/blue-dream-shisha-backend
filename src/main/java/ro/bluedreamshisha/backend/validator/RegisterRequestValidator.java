@@ -31,6 +31,20 @@ public class RegisterRequestValidator implements Validator<RegisterRequest> {
                 "username",
                 FieldErrorCode.REGISTER_USERNAME_BLANK
         );
+        boolean minUsernameLength = CheckUtils.minLength(
+                fieldErrors,
+                target.getUsername(),
+                Rule.usernameLength.getLeft(),
+                "username",
+                FieldErrorCode.REGISTER_USERNAME_MIN_LENGTH
+        );
+        boolean maxUsernameLength = CheckUtils.maxLength(
+                fieldErrors,
+                target.getUsername(),
+                Rule.usernameLength.getRight(),
+                "username",
+                FieldErrorCode.REGISTER_USERNAME_MAX_LENGTH
+        );
         boolean passwordNotBlank = CheckUtils.notBlank(
                 fieldErrors,
                 target.getPassword(),
@@ -38,7 +52,7 @@ public class RegisterRequestValidator implements Validator<RegisterRequest> {
                 FieldErrorCode.REGISTER_PASSWORD_BLANK
         );
 
-        if (usernameNotBlank) {
+        if (usernameNotBlank && minUsernameLength && maxUsernameLength) {
             Optional<User> user = userService.findByUsername(target.getUsername());
             if (user.isPresent()) {
                 fieldErrors.add(new FieldError("username", FieldErrorCode.REGISTER_USERNAME_EXISTS));
