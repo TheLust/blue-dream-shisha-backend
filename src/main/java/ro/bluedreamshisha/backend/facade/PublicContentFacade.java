@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import ro.bluedreamshisha.backend.client.FileManagementClient;
 import ro.bluedreamshisha.backend.constant.ErrorCode;
-import ro.bluedreamshisha.backend.exception.BlueDreamShishaException;
+import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.BlueDreamShishaException;
 import ro.bluedreamshisha.backend.exception.FileManagementException;
 import ro.bluedreamshisha.backend.exception.NotFoundException;
 import ro.bluedreamshisha.backend.model.ModelMapper;

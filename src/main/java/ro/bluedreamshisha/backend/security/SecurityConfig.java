@@ -21,7 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import ro.bluedreamshisha.backend.constant.ErrorCode;
-import ro.bluedreamshisha.backend.exception.BlueDreamShishaErrorResponse;
+import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.BlueDreamShishaErrorResponse;
 import ro.bluedreamshisha.backend.model.auth.Role;
 import ro.bluedreamshisha.backend.service.UserDetailsService;
 

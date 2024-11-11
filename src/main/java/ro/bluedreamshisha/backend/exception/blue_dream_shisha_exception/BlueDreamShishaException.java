@@ -1,4 +1,4 @@
-package ro.bluedreamshisha.backend.exception;
+package ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -12,18 +12,18 @@ public class BlueDreamShishaException extends Exception {
         this.response = new BlueDreamShishaErrorResponse(errorCode, status);
     }
 
-    public BlueDreamShishaException(String errorCode, HttpStatus status, Throwable cause) {
-        super(cause);
-        this.response = new BlueDreamShishaErrorResponse(errorCode, status, cause);
-    }
-
     public BlueDreamShishaException(String message, String errorCode, HttpStatus status) {
         super(message);
         this.response = new BlueDreamShishaErrorResponse(message, errorCode, status);
     }
 
+    public BlueDreamShishaException(String errorCode, HttpStatus status, Throwable cause) {
+        super(cause);
+        this.response = new BlueDreamShishaErrorResponse(errorCode, status);
+    }
+
     public BlueDreamShishaException(String message, String errorCode, HttpStatus status, Throwable cause) {
         super(message, cause);
-        this.response = new BlueDreamShishaErrorResponse(message, errorCode, status, cause);
+        this.response = new BlueDreamShishaErrorResponse(message, errorCode, status);
     }
 }

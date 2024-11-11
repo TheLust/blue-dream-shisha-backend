@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ro.bluedreamshisha.backend.client.FileManagementClient;
 import ro.bluedreamshisha.backend.constant.ErrorCode;
-import ro.bluedreamshisha.backend.exception.BlueDreamShishaException;
+import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.BlueDreamShishaException;
 import ro.bluedreamshisha.backend.model.file_management.File;
 import ro.bluedreamshisha.backend.model.file_management.FileCategory;
 import ro.bluedreamshisha.backend.repository.FileRepository;

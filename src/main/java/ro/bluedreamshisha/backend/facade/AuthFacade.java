@@ -9,9 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ro.bluedreamshisha.backend.constant.ErrorCode;
-import ro.bluedreamshisha.backend.constant.FieldErrorCode;
-import ro.bluedreamshisha.backend.constant.Rule;
-import ro.bluedreamshisha.backend.exception.BlueDreamShishaException;
+import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.BlueDreamShishaException;
 import ro.bluedreamshisha.backend.model.ModelMapper;
 import ro.bluedreamshisha.backend.model.auth.Account;
 import ro.bluedreamshisha.backend.model.auth.Role;
@@ -24,11 +22,10 @@ import ro.bluedreamshisha.backend.model.response.AuthResponse;
 import ro.bluedreamshisha.backend.security.JwtUtils;
 import ro.bluedreamshisha.backend.service.AccountService;
 import ro.bluedreamshisha.backend.service.UserService;
-import ro.bluedreamshisha.backend.util.CheckUtils;
+import ro.bluedreamshisha.backend.validator.LoginRequestValidator;
+import ro.bluedreamshisha.backend.validator.RegisterRequestValidator;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -36,20 +33,15 @@ public class AuthFacade {
 
     private final UserService userService;
     private final AccountService accountService;
+    private final LoginRequestValidator loginRequestValidator;
+    private final RegisterRequestValidator registerRequestValidator;
     private final ModelMapper mapper;
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
     private final PasswordEncoder passwordEncoder;
 
     public AuthResponse login(LoginRequest request) throws BlueDreamShishaException {
-        List<FieldError> fieldErrors = check(request);
-        if (!fieldErrors.isEmpty()) {
-            throw new BlueDreamShishaException(
-                    ErrorCode.CHECK_ERROR,
-                    HttpStatus.BAD_REQUEST
-            );
-        }
-
+        loginRequestValidator.checkAndThrow(request);
         return generateToken(
                 request.getUsername(),
                 request.getPassword()
@@ -57,13 +49,7 @@ public class AuthFacade {
     }
 
     public AuthResponse register(RegisterRequest request) throws BlueDreamShishaException {
-        List<FieldError> fieldErrors = check(request);
-        if (!fieldErrors.isEmpty()) {
-            throw new BlueDreamShishaException(
-                    ErrorCode.CHECK_ERROR,
-                    HttpStatus.BAD_REQUEST
-            );
-        }
+        registerRequestValidator.checkAndThrow(request);
 
         Account account = mapper.toEntity(request);
         User user = account.getUser();
@@ -83,76 +69,11 @@ public class AuthFacade {
     }
 
     public List<FieldError> check(LoginRequest request) {
-        List<FieldError> fieldErrors = new ArrayList<>();
-
-        boolean usernameNotBlank = CheckUtils.notBlank(
-                fieldErrors,
-                request.getUsername(),
-                "username",
-                FieldErrorCode.LOGIN_USERNAME_BLANK
-        );
-        boolean passwordNotBlank = CheckUtils.notBlank(
-                fieldErrors,
-                request.getPassword(),
-                "password",
-                FieldErrorCode.LOGIN_PASSWORD_BLANK
-        );
-
-        if (usernameNotBlank) {
-            Optional<User> user = userService.findByUsername(request.getUsername());
-            if (user.isEmpty()) {
-                fieldErrors.add(new FieldError("username", FieldErrorCode.LOGIN_USERNAME_NOT_EXISTS));
-            } else {
-                if (passwordNotBlank && !passwordEncoder.matches(request.getPassword(), user.get().getPassword())) {
-                    fieldErrors.add(new FieldError("password", FieldErrorCode.LOGIN_PASSWORD_INCORRECT));
-                }
-            }
-
-        }
-
-        return fieldErrors;
+        return loginRequestValidator.check(request);
     }
 
     public List<FieldError> check(RegisterRequest request) {
-        List<FieldError> fieldErrors = new ArrayList<>();
-
-        boolean usernameNotBlank = CheckUtils.notBlank(
-                fieldErrors,
-                request.getUsername(),
-                "username",
-                FieldErrorCode.REGISTER_USERNAME_BLANK
-        );
-        boolean passwordNotBlank = CheckUtils.notBlank(
-                fieldErrors,
-                request.getPassword(),
-                "password",
-                FieldErrorCode.REGISTER_PASSWORD_BLANK
-        );
-
-        if (usernameNotBlank) {
-            Optional<User> user = userService.findByUsername(request.getUsername());
-            if (user.isPresent()) {
-                fieldErrors.add(new FieldError("username", FieldErrorCode.REGISTER_USERNAME_EXISTS));
-            }
-        }
-
-        if (passwordNotBlank && !checkPassword(request.getPassword())) {
-            fieldErrors.add(new FieldError("password", FieldErrorCode.REGISTER_PASSWORD_WEEK));
-        }
-
-        return fieldErrors;
-    }
-
-    private boolean checkPassword(String password) {
-        Integer min = Rule.passwordLength.getLeft();
-        Integer max = Rule.passwordLength.getRight();
-        int length = password.length();
-
-        if (min > length || max < length) {
-            return false;
-        }
-
-        return password.matches(Rule.passwordPattern);
+        return registerRequestValidator.check(request);
     }
 
     private AuthResponse generateToken(String username, String password) throws BlueDreamShishaException {
