@@ -2,6 +2,8 @@ package ro.bluedreamshisha.backend.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +24,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import ro.bluedreamshisha.backend.constant.ErrorCode;
 import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.BlueDreamShishaErrorResponse;
-import ro.bluedreamshisha.backend.model.auth.Role;
 import ro.bluedreamshisha.backend.service.UserDetailsService;
 
 @Configuration
@@ -36,33 +37,28 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
-        ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
 
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request ->
                         request.requestMatchers(
-                                        "/api/v1/**",
+                                        "/api/v1/public/**",
                                         "/api/v1/auth/**",
-                                        "/api/v1/init/**",
                                         "/v2/api-docs",
                                         "/v3/api-docs",
                                         "/v3/api-docs/**",
                                         "/swagger-resources",
                                         "/swagger-resources/**",
-                                        "/configuration/ui",
-                                        "/configuration/security",
                                         "/swagger-ui/**",
-                                        "webjars/**",
-                                        "swagger-ui.html",
-                                        "/api/v1/companies/**",
-                                        "/api/v1/images/**"
+                                        "swagger-ui.html"
                                 ).permitAll()
-                                .requestMatchers("/api/v1/profile/**")
-                                .anonymous()
-                                .requestMatchers("/api/v1/cms/**")
-                                .hasAuthority(Role.MASTER.name())
+                                .anyRequest()
+                                .authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
 //                .oauth2ResourceServer(c -> c.opaqueToken(Customizer.withDefaults()));

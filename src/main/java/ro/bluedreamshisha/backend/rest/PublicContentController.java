@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import ro.bluedreamshisha.backend.constant.SwaggerDescription;
 import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.BlueDreamShishaException;
 import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.ServiceError;
+import ro.bluedreamshisha.backend.facade.I18nFacade;
 import ro.bluedreamshisha.backend.facade.PublicContentFacade;
 import ro.bluedreamshisha.backend.model.swiper_image.SwiperImageDto;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -31,6 +33,7 @@ import java.util.UUID;
 public class PublicContentController {
 
     private final PublicContentFacade publicContentFacade;
+    private final I18nFacade i18nFacade;
 
     @GetMapping("/swiper/images")
     @Operation(operationId = "find-swiper-images")
@@ -91,5 +94,30 @@ public class PublicContentController {
                 headers,
                 HttpStatus.OK
         );
+    }
+
+    @GetMapping(
+            value = "/i18n/languages/{language}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @Operation(operationId = "get-translations")
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = SwaggerDescription.HTTP_200
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = SwaggerDescription.HTTP_400,
+                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = SwaggerDescription.HTTP_500,
+                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+            )
+    })
+    public Map<String, String> findTranslations(@PathVariable("language") String language) {
+        return i18nFacade.findTranslations(language);
     }
 }

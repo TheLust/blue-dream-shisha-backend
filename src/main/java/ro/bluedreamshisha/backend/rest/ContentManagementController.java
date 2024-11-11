@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import ro.bluedreamshisha.backend.constant.SwaggerDescription;
 import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.BlueDreamShishaException;
 import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.ServiceError;
 import ro.bluedreamshisha.backend.facade.ContentManagementFacade;
+import ro.bluedreamshisha.backend.model.auth.UserDetails;
 import ro.bluedreamshisha.backend.model.swiper_image.SwiperImageDto;
 
 @RestController
@@ -44,13 +46,24 @@ public class ContentManagementController {
                     content = @Content(schema = @Schema(implementation = ServiceError.class))
             ),
             @ApiResponse(
+                    responseCode = "401",
+                    description = SwaggerDescription.HTTP_401,
+                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+            ),
+            @ApiResponse(
+                    responseCode = "403",
+                    description = SwaggerDescription.HTTP_403,
+                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+            ),
+            @ApiResponse(
                     responseCode = "500",
                     description = SwaggerDescription.HTTP_500,
                     content = @Content(schema = @Schema(implementation = ServiceError.class))
             )
     })
     public SwiperImageDto uploadSwiperImage(@RequestParam("order") Integer order,
-                                            @RequestParam MultipartFile image) throws BlueDreamShishaException {
-        return contentManagementFacade.uploadSwiperImage(image, order);
+                                            @RequestParam MultipartFile image,
+                                            @AuthenticationPrincipal UserDetails requester) throws BlueDreamShishaException {
+        return contentManagementFacade.uploadSwiperImage(image, order, requester);
     }
 }
