@@ -24,13 +24,13 @@ import ro.bluedreamshisha.backend.model.swiper_image.SwiperImageDto;
 @RestController
 @RequestMapping("${api.url.base}/cms")
 @RequiredArgsConstructor
-@Tag(name = "CMS")
-public class ContentManagementController {
+@Tag(name = "Cms Swiper")
+public class CmsSwiperController {
 
     private final ContentManagementFacade contentManagementFacade;
 
     @PostMapping(
-            value = "/swiper/images",
+            value = "/images",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )

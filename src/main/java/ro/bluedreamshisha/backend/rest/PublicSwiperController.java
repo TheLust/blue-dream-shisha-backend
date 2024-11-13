@@ -18,24 +18,21 @@ import org.springframework.web.bind.annotation.RestController;
 import ro.bluedreamshisha.backend.constant.SwaggerDescription;
 import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.BlueDreamShishaException;
 import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.ServiceError;
-import ro.bluedreamshisha.backend.facade.I18nFacade;
 import ro.bluedreamshisha.backend.facade.PublicContentFacade;
 import ro.bluedreamshisha.backend.model.swiper_image.SwiperImageDto;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("${api.url.base}/public")
+@RequestMapping("${api.url.base}/public/swiper")
 @RequiredArgsConstructor
-@Tag(name = "Public Content")
-public class PublicContentController {
+@Tag(name = "Public Swiper")
+public class PublicSwiperController {
 
     private final PublicContentFacade publicContentFacade;
-    private final I18nFacade i18nFacade;
 
-    @GetMapping("/swiper/images")
+    @GetMapping(value = "/images", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(operationId = "find-swiper-images")
     @ApiResponses({
             @ApiResponse(
@@ -61,7 +58,7 @@ public class PublicContentController {
     }
 
     @GetMapping(
-            value = "/swiper/images/{id}",
+            value = "/images/{id}",
             produces = {
                     MediaType.IMAGE_JPEG_VALUE,
                     MediaType.IMAGE_PNG_VALUE,
@@ -109,36 +106,5 @@ public class PublicContentController {
                 headers,
                 HttpStatus.OK
         );
-    }
-
-    @GetMapping(
-            value = "/i18n/languages/{language}",
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    @Operation(operationId = "get-translations")
-    @ApiResponses({
-            @ApiResponse(
-                    responseCode = "200",
-                    description = SwaggerDescription.HTTP_200
-            ),
-            @ApiResponse(
-                    responseCode = "400",
-                    description = SwaggerDescription.HTTP_400,
-                    content = @Content(
-                            mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = ServiceError.class)
-                    )
-            ),
-            @ApiResponse(
-                    responseCode = "500",
-                    description = SwaggerDescription.HTTP_500,
-                    content = @Content(
-                            mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = ServiceError.class)
-                    )
-            )
-    })
-    public Map<String, String> findTranslations(@PathVariable("language") String language) {
-        return i18nFacade.findTranslations(language);
     }
 }

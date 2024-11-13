@@ -27,7 +27,7 @@ public class ContentManagementFacade {
     private final ModelMapper mapper;
 
     public SwiperImageDto uploadSwiperImage(MultipartFile image, Integer order, UserDetails requester) throws BlueDreamShishaException {
-        authorizationService.checkUserHasAdministrativeRole(requester.getUser());
+//        authorizationService.checkUserHasAdministrativeRole(requester.getUser());
 
         //TODO: check file extension to be image
 
