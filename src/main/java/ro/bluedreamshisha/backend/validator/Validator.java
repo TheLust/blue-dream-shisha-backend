@@ -16,7 +16,7 @@ public interface Validator<T> {
         if (!fieldErrors.isEmpty()) {
             throw new BlueDreamShishaException(
                     "The request has check errors. Check api should be called first to resolve field errors",
-                    ErrorCode.CHECK_ERROR,
+                    ErrorCode.CHECK,
                     HttpStatus.BAD_REQUEST
             );
         }

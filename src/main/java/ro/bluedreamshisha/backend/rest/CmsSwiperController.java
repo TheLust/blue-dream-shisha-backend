@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import ro.bluedreamshisha.backend.constant.SwaggerDescription;
 import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.BlueDreamShishaException;
-import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.ServiceError;
+import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.BlueDreamShishaErrorResponse;
 import ro.bluedreamshisha.backend.facade.ContentManagementFacade;
 import ro.bluedreamshisha.backend.model.auth.UserDetails;
 import ro.bluedreamshisha.backend.model.swiper_image.SwiperImageDto;
@@ -45,7 +45,7 @@ public class CmsSwiperController {
                     description = SwaggerDescription.HTTP_400,
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = ServiceError.class)
+                            schema = @Schema(implementation = BlueDreamShishaErrorResponse.class)
                     )
             ),
             @ApiResponse(
@@ -53,7 +53,7 @@ public class CmsSwiperController {
                     description = SwaggerDescription.HTTP_401,
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = ServiceError.class)
+                            schema = @Schema(implementation = BlueDreamShishaErrorResponse.class)
                     )
             ),
             @ApiResponse(
@@ -61,7 +61,7 @@ public class CmsSwiperController {
                     description = SwaggerDescription.HTTP_403,
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = ServiceError.class)
+                            schema = @Schema(implementation = BlueDreamShishaErrorResponse.class)
                     )
             ),
             @ApiResponse(
@@ -69,7 +69,7 @@ public class CmsSwiperController {
                     description = SwaggerDescription.HTTP_500,
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = ServiceError.class)
+                            schema = @Schema(implementation = BlueDreamShishaErrorResponse.class)
                     )
             )
     })

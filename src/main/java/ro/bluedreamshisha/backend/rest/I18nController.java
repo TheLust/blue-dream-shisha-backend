@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ro.bluedreamshisha.backend.constant.ErrorCode;
 import ro.bluedreamshisha.backend.constant.SwaggerDescription;
 import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.BlueDreamShishaException;
-import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.ServiceError;
+import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.BlueDreamShishaErrorResponse;
 import ro.bluedreamshisha.backend.facade.I18nFacade;
 
 import java.io.IOException;
@@ -41,7 +41,7 @@ public class I18nController {
                     description = SwaggerDescription.HTTP_400,
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = ServiceError.class)
+                            schema = @Schema(implementation = BlueDreamShishaErrorResponse.class)
                     )
             ),
             @ApiResponse(
@@ -49,7 +49,7 @@ public class I18nController {
                     description = SwaggerDescription.HTTP_401,
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = ServiceError.class)
+                            schema = @Schema(implementation = BlueDreamShishaErrorResponse.class)
                     )
             ),
             @ApiResponse(
@@ -57,7 +57,7 @@ public class I18nController {
                     description = SwaggerDescription.HTTP_403,
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = ServiceError.class)
+                            schema = @Schema(implementation = BlueDreamShishaErrorResponse.class)
                     )
             ),
             @ApiResponse(
@@ -65,7 +65,7 @@ public class I18nController {
                     description = SwaggerDescription.HTTP_500,
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = ServiceError.class)
+                            schema = @Schema(implementation = BlueDreamShishaErrorResponse.class)
                     )
             )
     })

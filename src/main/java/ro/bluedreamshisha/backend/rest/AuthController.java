@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ro.bluedreamshisha.backend.constant.SwaggerDescription;
+import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.BlueDreamShishaErrorResponse;
 import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.BlueDreamShishaException;
-import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.ServiceError;
 import ro.bluedreamshisha.backend.facade.AuthFacade;
 import ro.bluedreamshisha.backend.model.check.FieldError;
 import ro.bluedreamshisha.backend.model.request.LoginRequest;
@@ -45,12 +45,12 @@ public class AuthController {
             @ApiResponse(
                     responseCode = "400",
                     description = SwaggerDescription.HTTP_400,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(schema = @Schema(implementation = BlueDreamShishaErrorResponse.class))
             ),
             @ApiResponse(
                     responseCode = "500",
                     description = SwaggerDescription.HTTP_500,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(schema = @Schema(implementation = BlueDreamShishaErrorResponse.class))
             )
     })
     public AuthResponse login(@RequestBody LoginRequest request) throws BlueDreamShishaException {
@@ -71,12 +71,12 @@ public class AuthController {
             @ApiResponse(
                     responseCode = "400",
                     description = SwaggerDescription.HTTP_400,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(schema = @Schema(implementation = BlueDreamShishaErrorResponse.class))
             ),
             @ApiResponse(
                     responseCode = "500",
                     description = SwaggerDescription.HTTP_500,
-                    content = @Content(schema = @Schema(implementation = ServiceError.class))
+                    content = @Content(schema = @Schema(implementation = BlueDreamShishaErrorResponse.class))
             )
     })
     public List<FieldError> checkLoginRequest(@RequestBody LoginRequest request) {
@@ -99,7 +99,7 @@ public class AuthController {
                     description = SwaggerDescription.HTTP_400,
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = ServiceError.class)
+                            schema = @Schema(implementation = BlueDreamShishaErrorResponse.class)
                     )
             ),
             @ApiResponse(
@@ -107,7 +107,7 @@ public class AuthController {
                     description = SwaggerDescription.HTTP_500,
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = ServiceError.class)
+                            schema = @Schema(implementation = BlueDreamShishaErrorResponse.class)
                     )
             )
     })
@@ -131,7 +131,7 @@ public class AuthController {
                     description = SwaggerDescription.HTTP_400,
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = ServiceError.class)
+                            schema = @Schema(implementation = BlueDreamShishaErrorResponse.class)
                     )
             ),
             @ApiResponse(
@@ -139,7 +139,7 @@ public class AuthController {
                     description = SwaggerDescription.HTTP_500,
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = ServiceError.class)
+                            schema = @Schema(implementation = BlueDreamShishaErrorResponse.class)
                     )
             )
     })
