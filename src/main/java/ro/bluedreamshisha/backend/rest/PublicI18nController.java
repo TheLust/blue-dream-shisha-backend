@@ -8,29 +8,32 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ro.bluedreamshisha.backend.constant.SwaggerDescription;
 import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.BlueDreamShishaErrorResponse;
+import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.BlueDreamShishaException;
 import ro.bluedreamshisha.backend.facade.I18nFacade;
+import ro.bluedreamshisha.backend.model.request.i18n.SearchTranslationsByPrefixListRequest;
 
 import java.util.Map;
 
 @RestController
-@RequestMapping("${api.url.base}/public/i18n")
+@RequestMapping("${api.url.base}/public/i18n/languages/{language}")
 @RequiredArgsConstructor
 @Tag(name = "Public I18n")
 public class PublicI18nController {
 
     private final I18nFacade i18nFacade;
 
-    @GetMapping(
-            value = "/languages/{language}",
+    @PostMapping(
+            value = "",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    @Operation(operationId = "get-translations")
+    @Operation(operationId = "search-translations-by-prefix-list")
     @ApiResponses({
             @ApiResponse(
                     responseCode = "200",
@@ -53,7 +56,10 @@ public class PublicI18nController {
                     )
             )
     })
-    public Map<String, String> findTranslations(@PathVariable("language") String language) {
-        return i18nFacade.findTranslations(language);
+    public Map<String, String> searchTranslationsByPrefixList(
+            @PathVariable("language") String language,
+            @RequestBody SearchTranslationsByPrefixListRequest request
+    ) throws BlueDreamShishaException {
+        return i18nFacade.searchTranslationsByPrefixList(language, request);
     }
 }

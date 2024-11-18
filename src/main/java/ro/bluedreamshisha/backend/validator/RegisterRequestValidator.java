@@ -7,7 +7,7 @@ import ro.bluedreamshisha.backend.constant.Rule;
 import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.BlueDreamShishaException;
 import ro.bluedreamshisha.backend.model.auth.User;
 import ro.bluedreamshisha.backend.model.check.FieldError;
-import ro.bluedreamshisha.backend.model.request.RegisterRequest;
+import ro.bluedreamshisha.backend.model.request.auth.RegisterRequest;
 import ro.bluedreamshisha.backend.service.UserService;
 import ro.bluedreamshisha.backend.util.CheckUtils;
 

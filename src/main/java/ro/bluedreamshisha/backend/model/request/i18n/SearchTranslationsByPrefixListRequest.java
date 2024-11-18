@@ -1,15 +1,17 @@
-package ro.bluedreamshisha.backend.model.request;
+package ro.bluedreamshisha.backend.model.request.i18n;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class LoginRequest {
+public class SearchTranslationsByPrefixListRequest {
 
-    private String username;
-    private String password;
+    private List<String> prefixList = new ArrayList<>();
 }

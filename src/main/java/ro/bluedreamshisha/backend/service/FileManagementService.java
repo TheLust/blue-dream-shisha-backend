@@ -29,7 +29,7 @@ public class FileManagementService {
         } catch (Exception e) {
             throw new BlueDreamShishaException(
                     "Could not upload file in file-management",
-                    ErrorCode.UNHANDLED_ERROR,
+                    ErrorCode.UNHANDLED,
                     HttpStatus.INTERNAL_SERVER_ERROR,
                     e
             );

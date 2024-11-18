@@ -17,8 +17,8 @@ import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.BlueDrea
 import ro.bluedreamshisha.backend.exception.blue_dream_shisha_exception.BlueDreamShishaException;
 import ro.bluedreamshisha.backend.facade.AuthFacade;
 import ro.bluedreamshisha.backend.model.check.FieldError;
-import ro.bluedreamshisha.backend.model.request.LoginRequest;
-import ro.bluedreamshisha.backend.model.request.RegisterRequest;
+import ro.bluedreamshisha.backend.model.request.auth.LoginRequest;
+import ro.bluedreamshisha.backend.model.request.auth.RegisterRequest;
 import ro.bluedreamshisha.backend.model.response.AuthResponse;
 
 import java.util.List;

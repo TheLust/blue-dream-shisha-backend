@@ -1,7 +1,8 @@
 CODE|LANGUAGE|TRANSLATION
-ERROR_UNHANDLED_ERROR|en|An unexpected error occurred in out system. Please try again
+ERROR_UNHANDLED|en|An unexpected error occurred in out system. Please try again
 ERROR_NOT_FOUND|en|The resource was not found in our system. Please try again
 ERROR_UNAUTHORIZED|en|You don't have access to this resource. Please contact us
 ERROR_ACCESS_DENIED|en|You don't have access to this resource. Please contact us
 ERROR_BAD_CREDENTIALS|en|Your username and password are incorrect
 ERROR_CHECK|en|The form validation failed. Please resolve the highlighted problems
+ERROR_SERVICE_UNAVAILABLE|en|Service Unavailable!

@@ -4,7 +4,7 @@ public interface ErrorCode {
 
     String PREFIX = "ERROR_";
 
-    String UNHANDLED_ERROR = PREFIX + "UNHANDLED_ERROR";
+    String UNHANDLED = PREFIX + "UNHANDLED";
     String NOT_FOUND = PREFIX + "NOT_FOUND";
     String UNAUTHORIZED = PREFIX + "UNAUTHORIZED";
     String ACCESS_DENIED = PREFIX + "ACCESS_DENIED";

@@ -75,7 +75,7 @@ public class I18nController {
         } catch (IOException e) {
             throw new BlueDreamShishaException(
                     "Could not upsert translations",
-                    ErrorCode.UNHANDLED_ERROR,
+                    ErrorCode.UNHANDLED,
                     HttpStatus.INTERNAL_SERVER_ERROR,
                     e
             );
